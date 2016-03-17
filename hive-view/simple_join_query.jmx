@@ -11,7 +11,7 @@
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
     </TestPlan>
     <hashTree>
-      <TestFragmentController guiclass="TestFragmentControllerGui" testclass="TestFragmentController" testname="select limit query" enabled="false"/>
+      <TestFragmentController guiclass="TestFragmentControllerGui" testclass="TestFragmentController" testname="simple join query" enabled="true"/>
       <hashTree>
         <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
           <collectionProp name="HeaderManager.headers">
@@ -46,7 +46,7 @@ vars.put(&quot;reqeustFlowId&quot;,reqeustFlowId);</stringProp>
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{&quot;job&quot;:{&quot;title&quot;:&quot;table1 sample&quot;,&quot;queryFile&quot;:null,&quot;owner&quot;:null,&quot;dataBase&quot;:&quot;default&quot;,&quot;status&quot;:null,&quot;statusMessage&quot;:null,&quot;dateSubmitted&quot;:null,&quot;forcedContent&quot;:&quot;SELECT * FROM table1 LIMIT 100;&quot;,&quot;logFile&quot;:null,&quot;dagName&quot;:null,&quot;dagId&quot;:null,&quot;sessionTag&quot;:null,&quot;statusDir&quot;:null,&quot;referrer&quot;:&quot;sample&quot;,&quot;confFile&quot;:null,&quot;globalSettings&quot;:&quot;&quot;}}</stringProp>
+                <stringProp name="Argument.value">{&quot;job&quot;:{&quot;title&quot;:&quot;table1 sample&quot;,&quot;queryFile&quot;:null,&quot;owner&quot;:null,&quot;dataBase&quot;:&quot;default&quot;,&quot;status&quot;:null,&quot;statusMessage&quot;:null,&quot;dateSubmitted&quot;:null,&quot;forcedContent&quot;:&quot;SELECT * FROM table1 as t1 join table2  as t2 on (t1.col1=t2.col1);&quot;,&quot;logFile&quot;:null,&quot;dagName&quot;:null,&quot;dagId&quot;:null,&quot;sessionTag&quot;:null,&quot;statusDir&quot;:null,&quot;referrer&quot;:&quot;sample&quot;,&quot;confFile&quot;:null,&quot;globalSettings&quot;:&quot;&quot;}}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
@@ -160,7 +160,7 @@ vars.put(&quot;jobStatus&quot;,json.job.status);
           <stringProp name="WhileController.condition">${__javaScript(&quot;${jobStatus}&quot; != &quot;Succeeded&quot; )}</stringProp>
         </WhileController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="87 /api/v1/views/HIVE/versions/1.0.0/instances/AUTO_HIVE_INSTANCE/jobs/${id}" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="87 /api/v1/views/HIVE/versions/1.0.0/instances/AUTO_HIVE_INSTANCE/jobs/${jobId}" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments"/>
             </elementProp>
@@ -197,7 +197,7 @@ vars.put(&quot;jobStatus&quot;,json.job.status);
             <hashTree/>
           </hashTree>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="88 /api/v1/views/HIVE/versions/1.0.0/instances/AUTO_HIVE_INSTANCE/jobs/101/results" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="88 /api/v1/views/HIVE/versions/1.0.0/instances/AUTO_HIVE_INSTANCE/jobs/${jobId}/results" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="first" elementType="HTTPArgument">
