@@ -25,6 +25,12 @@
           <stringProp name="IncludeController.includepath">hive_query.jmx</stringProp>
         </IncludeController>
         <hashTree/>
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
+          <boolProp name="displayJMeterProperties">false</boolProp>
+          <boolProp name="displayJMeterVariables">true</boolProp>
+          <boolProp name="displaySystemProperties">false</boolProp>
+        </DebugSampler>
+        <hashTree/>
         <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="insert into table1;" enabled="true">
           <stringProp name="scriptLanguage">javascript</stringProp>
           <stringProp name="parameters"></stringProp>
@@ -36,6 +42,12 @@
         <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include hive query.jmx" enabled="true">
           <stringProp name="IncludeController.includepath">hive_query.jmx</stringProp>
         </IncludeController>
+        <hashTree/>
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
+          <boolProp name="displayJMeterProperties">false</boolProp>
+          <boolProp name="displayJMeterVariables">true</boolProp>
+          <boolProp name="displaySystemProperties">false</boolProp>
+        </DebugSampler>
         <hashTree/>
         <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="create table2;" enabled="true">
           <stringProp name="scriptLanguage">javascript</stringProp>
@@ -54,8 +66,14 @@
           <stringProp name="parameters"></stringProp>
           <stringProp name="filename"></stringProp>
           <stringProp name="cacheKey"></stringProp>
-          <stringProp name="script">vars.put(&quot;hiveQuery&quot;,&quot;insert into table2 values ( \&quot;r1c1\&quot;, \&quot;r1c2\&quot;, \&quot;r1c3\&quot;);&quot;);</stringProp>
+          <stringProp name="script">vars.put(&quot;hiveQuery&quot;,&quot;insert into table2 values ( &apos;r1c1&apos;, &apos;r1c2&apos;, &apos;r1c3&apos;);&quot;);</stringProp>
         </JSR223Sampler>
+        <hashTree/>
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
+          <boolProp name="displayJMeterProperties">false</boolProp>
+          <boolProp name="displayJMeterVariables">true</boolProp>
+          <boolProp name="displaySystemProperties">false</boolProp>
+        </DebugSampler>
         <hashTree/>
         <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include hive query.jmx" enabled="true">
           <stringProp name="IncludeController.includepath">hive_query.jmx</stringProp>
@@ -68,6 +86,12 @@
           <stringProp name="cacheKey"></stringProp>
           <stringProp name="script">vars.remove(&quot;hiveQuery&quot;);</stringProp>
         </JSR223Sampler>
+        <hashTree/>
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
+          <boolProp name="displayJMeterProperties">false</boolProp>
+          <boolProp name="displayJMeterVariables">true</boolProp>
+          <boolProp name="displaySystemProperties">false</boolProp>
+        </DebugSampler>
         <hashTree/>
       </hashTree>
     </hashTree>

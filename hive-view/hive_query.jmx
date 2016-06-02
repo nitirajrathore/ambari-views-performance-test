@@ -57,7 +57,7 @@ vars.put(&quot;reqeustFlowId&quot;,reqeustFlowId);</stringProp>
             <stringProp name="HTTPSampler.port"></stringProp>
             <stringProp name="HTTPSampler.connect_timeout"></stringProp>
             <stringProp name="HTTPSampler.response_timeout"></stringProp>
-            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
             <stringProp name="HTTPSampler.path">/api/v1/views/HIVE/versions/1.0.0/instances/${hiveInstanceName}/jobs</stringProp>
             <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -126,7 +126,13 @@ if( json.job.status == &quot;Error&quot; || json.job.status == &quot;Canceled&qu
             </HeaderManager>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/resources/file/${queryFile}" enabled="true">
+          <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
+            <boolProp name="displayJMeterProperties">false</boolProp>
+            <boolProp name="displayJMeterVariables">true</boolProp>
+            <boolProp name="displaySystemProperties">false</boolProp>
+          </DebugSampler>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/resources/file/queryFile" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments"/>
             </elementProp>
@@ -134,7 +140,7 @@ if( json.job.status == &quot;Error&quot; || json.job.status == &quot;Canceled&qu
             <stringProp name="HTTPSampler.port"></stringProp>
             <stringProp name="HTTPSampler.connect_timeout"></stringProp>
             <stringProp name="HTTPSampler.response_timeout"></stringProp>
-            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
             <stringProp name="HTTPSampler.path">/api/v1/views/HIVE/versions/1.0.0/instances/${hiveInstanceName}/resources/file/${queryFile}</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -150,7 +156,7 @@ if( json.job.status == &quot;Error&quot; || json.job.status == &quot;Canceled&qu
             <stringProp name="WhileController.condition">${checkForSuccess}</stringProp>
           </WhileController>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/jobs/${jobId}" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/jobs/id" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
                 <collectionProp name="Arguments.arguments"/>
               </elementProp>
@@ -158,7 +164,7 @@ if( json.job.status == &quot;Error&quot; || json.job.status == &quot;Canceled&qu
               <stringProp name="HTTPSampler.port"></stringProp>
               <stringProp name="HTTPSampler.connect_timeout"></stringProp>
               <stringProp name="HTTPSampler.response_timeout"></stringProp>
-              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
               <stringProp name="HTTPSampler.path">/api/v1/views/HIVE/versions/1.0.0/instances/${hiveInstanceName}/jobs/${jobId}</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -189,14 +195,14 @@ if( status == &quot;Error&quot; || status == &quot;Canceled&quot; || status == &
 	vars.put(&quot;checkForSuccess&quot;,false);	
 	AssertionResult.setFailureMessage(&quot;The status for job was : &quot; + status + &quot;. So it failed&quot;);
 	AssertionResult.setFailure(true);
-} else if (status == &quot;Succeeded&quot;){
+} else if (status == &quot;Succeeded&quot; || status == &quot;SUCCEEDED&quot;){ // note sometime the status is capital and sometime its small letter
 	vars.put(&quot;checkForSuccess&quot;,false);	
 }
 </stringProp>
               </JSR223Assertion>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/resources/file/${logFile}" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/resources/file/logFile" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
                 <collectionProp name="Arguments.arguments"/>
               </elementProp>
@@ -204,7 +210,7 @@ if( status == &quot;Error&quot; || status == &quot;Canceled&quot; || status == &
               <stringProp name="HTTPSampler.port"></stringProp>
               <stringProp name="HTTPSampler.connect_timeout"></stringProp>
               <stringProp name="HTTPSampler.response_timeout"></stringProp>
-              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
               <stringProp name="HTTPSampler.path">/api/v1/views/HIVE/versions/1.0.0/instances/${hiveInstanceName}/resources/file/${logFile}</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -217,7 +223,13 @@ if( status == &quot;Error&quot; || status == &quot;Canceled&quot; || status == &
             </HTTPSamplerProxy>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/jobs/${jobId}/results" enabled="true">
+          <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
+            <boolProp name="displayJMeterProperties">false</boolProp>
+            <boolProp name="displayJMeterVariables">true</boolProp>
+            <boolProp name="displaySystemProperties">false</boolProp>
+          </DebugSampler>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/jobs/jobId/results" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments">
                 <elementProp name="first" elementType="HTTPArgument">
@@ -233,7 +245,7 @@ if( status == &quot;Error&quot; || status == &quot;Canceled&quot; || status == &
             <stringProp name="HTTPSampler.port"></stringProp>
             <stringProp name="HTTPSampler.connect_timeout"></stringProp>
             <stringProp name="HTTPSampler.response_timeout"></stringProp>
-            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
             <stringProp name="HTTPSampler.path">/api/v1/views/HIVE/versions/1.0.0/instances/AUTO_HIVE_INSTANCE/jobs/${jobId}/results</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -246,6 +258,12 @@ if( status == &quot;Error&quot; || status == &quot;Canceled&quot; || status == &
           </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
+          <boolProp name="displayJMeterProperties">false</boolProp>
+          <boolProp name="displayJMeterVariables">true</boolProp>
+          <boolProp name="displaySystemProperties">false</boolProp>
+        </DebugSampler>
+        <hashTree/>
         <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Cleanup JSR223 Sampler" enabled="true">
           <stringProp name="scriptLanguage">javascript</stringProp>
           <stringProp name="parameters"></stringProp>

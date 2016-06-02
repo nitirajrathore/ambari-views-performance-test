@@ -11,15 +11,15 @@
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
     </TestPlan>
     <hashTree>
-      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set for list of Users" enabled="true">
-        <stringProp name="filename">newUsers.txt</stringProp>
-        <stringProp name="fileEncoding"></stringProp>
-        <stringProp name="variableNames">username,password,basic_auth</stringProp>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
         <stringProp name="delimiter">,</stringProp>
+        <stringProp name="fileEncoding"></stringProp>
+        <stringProp name="filename">users.txt</stringProp>
         <boolProp name="quotedData">false</boolProp>
         <boolProp name="recycle">true</boolProp>
-        <boolProp name="stopThread">false</boolProp>
         <stringProp name="shareMode">shareMode.all</stringProp>
+        <boolProp name="stopThread">false</boolProp>
+        <stringProp name="variableNames">USERNAME,PASSWORD,BASIC_AUTH</stringProp>
       </CSVDataSet>
       <hashTree/>
       <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
@@ -44,11 +44,7 @@
           </elementProp>
           <elementProp name="" elementType="Header">
             <stringProp name="Header.name">Authorization</stringProp>
-            <stringProp name="Header.value">Basic YWRtaW46YWRtaW4=</stringProp>
-          </elementProp>
-          <elementProp name="" elementType="Header">
-            <stringProp name="Header.name">cookie</stringProp>
-            <stringProp name="Header.value">AMBARISESSIONID=hmxmg50ck93c1n2fwke1gl7jk </stringProp>
+            <stringProp name="Header.value">${BASIC_AUTH}</stringProp>
           </elementProp>
         </collectionProp>
       </HeaderManager>
@@ -90,10 +86,10 @@
         <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">30</stringProp>
+          <stringProp name="LoopController.loops">1</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">1</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">10</stringProp>
+        <stringProp name="ThreadGroup.num_threads">30</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">30</stringProp>
         <longProp name="ThreadGroup.start_time">1457953656000</longProp>
         <longProp name="ThreadGroup.end_time">1457953656000</longProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
@@ -141,12 +137,12 @@
           <stringProp name="IncludeController.includepath">open_history_and_query.jmx</stringProp>
         </IncludeController>
         <hashTree/>
-        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include create user" enabled="false">
-          <stringProp name="IncludeController.includepath">create_user.jmx</stringProp>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include multiline Query" enabled="true">
+          <stringProp name="IncludeController.includepath">multiline_query.jmx</stringProp>
         </IncludeController>
         <hashTree/>
-        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include delete user" enabled="true">
-          <stringProp name="IncludeController.includepath">delete_user.jmx</stringProp>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include create user" enabled="false">
+          <stringProp name="IncludeController.includepath">create_user.jmx</stringProp>
         </IncludeController>
         <hashTree/>
       </hashTree>
@@ -203,7 +199,7 @@
             <threadCounts>true</threadCounts>
           </value>
         </objProp>
-        <stringProp name="filename">logs/viewResultsTree.log</stringProp>
+        <stringProp name="filename">logs/viewResultsTree_30Users.log</stringProp>
       </ResultCollector>
       <hashTree/>
       <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">

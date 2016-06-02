@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jmeterTestPlan version="1.2" properties="2.8" jmeter="2.13 r1665067">
   <hashTree>
-    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Hive Test Plan" enabled="true">
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Pig Test Plan" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
       <boolProp name="TestPlan.functional_mode">false</boolProp>
       <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
@@ -11,22 +11,11 @@
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
     </TestPlan>
     <hashTree>
-      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set for list of Users" enabled="true">
-        <stringProp name="filename">newUsers.txt</stringProp>
-        <stringProp name="fileEncoding"></stringProp>
-        <stringProp name="variableNames">username,password,basic_auth</stringProp>
-        <stringProp name="delimiter">,</stringProp>
-        <boolProp name="quotedData">false</boolProp>
-        <boolProp name="recycle">true</boolProp>
-        <boolProp name="stopThread">false</boolProp>
-        <stringProp name="shareMode">shareMode.all</stringProp>
-      </CSVDataSet>
-      <hashTree/>
       <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
         <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
           <collectionProp name="Arguments.arguments"/>
         </elementProp>
-        <stringProp name="HTTPSampler.domain">c6403.ambari.apache.org</stringProp>
+        <stringProp name="HTTPSampler.domain">c6401.ambari.apache.org</stringProp>
         <stringProp name="HTTPSampler.port">8080</stringProp>
         <stringProp name="HTTPSampler.connect_timeout"></stringProp>
         <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -46,18 +35,14 @@
             <stringProp name="Header.name">Authorization</stringProp>
             <stringProp name="Header.value">Basic YWRtaW46YWRtaW4=</stringProp>
           </elementProp>
-          <elementProp name="" elementType="Header">
-            <stringProp name="Header.name">cookie</stringProp>
-            <stringProp name="Header.value">AMBARISESSIONID=hmxmg50ck93c1n2fwke1gl7jk </stringProp>
-          </elementProp>
         </collectionProp>
       </HeaderManager>
       <hashTree/>
       <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
         <collectionProp name="Arguments.arguments">
-          <elementProp name="hiveInstanceName" elementType="Argument">
-            <stringProp name="Argument.name">hiveInstanceName</stringProp>
-            <stringProp name="Argument.value">AUTO_HIVE_INSTANCE</stringProp>
+          <elementProp name="pigInstanceName" elementType="Argument">
+            <stringProp name="Argument.name">pigInstanceName</stringProp>
+            <stringProp name="Argument.value">pig</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -79,21 +64,16 @@
       </ThreadGroup>
       <hashTree>
         <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="Setup Once Only Controller" enabled="true"/>
-        <hashTree>
-          <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Create tables Include Controller" enabled="true">
-            <stringProp name="IncludeController.includepath">setup_hive_test.jmx</stringProp>
-          </IncludeController>
-          <hashTree/>
-        </hashTree>
+        <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Execute Hive Tests Thread Group" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Execute Pig Tests Thread Group" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">30</stringProp>
+          <stringProp name="LoopController.loops">10</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">1</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">10</stringProp>
+        <stringProp name="ThreadGroup.num_threads">10</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
         <longProp name="ThreadGroup.start_time">1457953656000</longProp>
         <longProp name="ThreadGroup.end_time">1457953656000</longProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
@@ -101,52 +81,8 @@
         <stringProp name="ThreadGroup.delay"></stringProp>
       </ThreadGroup>
       <hashTree>
-        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include Open Hive" enabled="false">
-          <stringProp name="IncludeController.includepath">open_hive_view.jmx</stringProp>
-        </IncludeController>
-        <hashTree/>
-        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include List Columns of Table" enabled="false">
-          <stringProp name="IncludeController.includepath">list_columns_of_table.jmx</stringProp>
-        </IncludeController>
-        <hashTree/>
-        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include Select Limit Query" enabled="false">
-          <stringProp name="IncludeController.includepath">select_limit_query.jmx</stringProp>
-        </IncludeController>
-        <hashTree/>
-        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="false">
-          <boolProp name="displayJMeterProperties">false</boolProp>
-          <boolProp name="displayJMeterVariables">true</boolProp>
-          <boolProp name="displaySystemProperties">false</boolProp>
-        </DebugSampler>
-        <hashTree/>
-        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include Simple Join Query" enabled="false">
-          <stringProp name="IncludeController.includepath">simple_join_query.jmx</stringProp>
-        </IncludeController>
-        <hashTree/>
-        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="false">
-          <boolProp name="displayJMeterProperties">false</boolProp>
-          <boolProp name="displayJMeterVariables">true</boolProp>
-          <boolProp name="displaySystemProperties">false</boolProp>
-        </DebugSampler>
-        <hashTree/>
-        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include Explain Query" enabled="false">
-          <stringProp name="IncludeController.includepath">explain_query.jmx</stringProp>
-        </IncludeController>
-        <hashTree/>
-        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include Create And Open Saved Query" enabled="false">
-          <stringProp name="IncludeController.includepath">create_and_open_saved_query.jmx</stringProp>
-        </IncludeController>
-        <hashTree/>
-        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include Open History and Query" enabled="false">
-          <stringProp name="IncludeController.includepath">open_history_and_query.jmx</stringProp>
-        </IncludeController>
-        <hashTree/>
-        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include create user" enabled="false">
-          <stringProp name="IncludeController.includepath">create_user.jmx</stringProp>
-        </IncludeController>
-        <hashTree/>
-        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include delete user" enabled="true">
-          <stringProp name="IncludeController.includepath">delete_user.jmx</stringProp>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include Open Pig View" enabled="true">
+          <stringProp name="IncludeController.includepath">open_pig_view.jmx</stringProp>
         </IncludeController>
         <hashTree/>
       </hashTree>
@@ -166,12 +102,7 @@
       </ThreadGroup>
       <hashTree>
         <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="TearDown Once Only Controller" enabled="true"/>
-        <hashTree>
-          <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="drop tables Include Controller" enabled="true">
-            <stringProp name="IncludeController.includepath">tear_down_hive_test.jmx</stringProp>
-          </IncludeController>
-          <hashTree/>
-        </hashTree>
+        <hashTree/>
       </hashTree>
       <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
@@ -236,7 +167,7 @@
             <threadCounts>true</threadCounts>
           </value>
         </objProp>
-        <stringProp name="filename">/Users/nrathore/opt/apache-jmeter-2.13/bin/scriptresults.jtl</stringProp>
+        <stringProp name="filename">logs/aggregateReport.csv</stringProp>
       </ResultCollector>
       <hashTree/>
       <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
@@ -302,7 +233,7 @@
             <threadCounts>true</threadCounts>
           </value>
         </objProp>
-        <stringProp name="filename">/Users/nrathore/opt/apache-jmeter-2.13/bin/scriptresults.jtl</stringProp>
+        <stringProp name="filename">aggregatedGraph.csv</stringProp>
       </ResultCollector>
       <hashTree/>
     </hashTree>
