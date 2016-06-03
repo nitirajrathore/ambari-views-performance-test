@@ -1,9 +1,10 @@
 userPrefix=$1
-noOfUsers=$2
+fromUser=$2
+toUser=$3
 password=admin
-for x in $(seq 1 $noOfUsers)
+
+for x in $(seq $fromUser $toUser)
 do
-	userName="$userPrefix$x"
-	auth=$(echo -n $userName:$password | openssl base64 -e)
-	echo "$userName,$password,Basic $auth"
+	username="$userPrefix$x"
+	./createAmbariUser.sh $username $password
 done

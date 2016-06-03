@@ -1,0 +1,6 @@
+all the failures are because of error between some proxy and ambari-server.
+Ambari server sends the data but proxy does not treats it as legal and reports error to the jmeter
+there were no errors in the ambari server logs.
+all the jobs successed from ambari side
+all the jobs succeeded in yarn cluster. (checked from yarn ui)
+
